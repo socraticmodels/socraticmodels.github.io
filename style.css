@@ -86,6 +86,16 @@ h1 {
     color: #191e3f;
 }
 
+h2 {
+    font-size: 24px;
+    line-height: 24px;
+    width: 100%;
+    color: #191e3f;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
 /**************************************************/
 
 #header {
@@ -108,8 +118,8 @@ h1 {
 
 #profile-name {
     width: 100%;
-    font-size: 32px;
-    line-height: 32px;
+    font-size: 36px;
+    line-height: 36px;
     color: #191e3f;
     margin-bottom: 10px;
     /*float: left;*/
@@ -120,8 +130,8 @@ h1 {
 
 #profile-subname {
     width: 100%;
-    font-size: 20px;
-    line-height: 20px;
+    font-size: 24px;
+    line-height: 24px;
     color: #191e3f;
     margin-bottom: 10px;
     /*float: left;*/
@@ -144,7 +154,7 @@ h1 {
     width: 100%;
     height: 70px;
     margin-top: 30px;
-    margin-left: 390px;
+    padding-left: 390px;
     /*background-color: #ddd;*/
 }
 
@@ -177,10 +187,6 @@ h1 {
 
 /**************************************************/
 
-.image-captioning h1 {
-    margin-top: 0px;
-}
-
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -189,17 +195,15 @@ h1 {
 body { font-family: sans-serif; }
 
 .gallery {
-  /*background: #EEE;*/
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   width: 900px;
   margin-left: 30px;
 }
 
 .gallery-cell {
   width: 265px;
-  height: 330px;
+  height: 420px;
   margin-right: 10px;
-  /*background: #8C8;*/
   counter-increment: gallery-cell;
 
 }
@@ -224,7 +228,6 @@ body { font-family: sans-serif; }
 .gallery-cell:before {
   display: block;
   text-align: center;
-  /*content: counter(gallery-cell);*/
   line-height: 200px;
   font-size: 80px;
   color: white;
@@ -242,7 +245,7 @@ body { font-family: sans-serif; }
 .gallery-cell p {
     color: #191e3f;
     padding: 5px 10px 5px 10px;
-    line-height: 18px;
+    line-height: 24px;
 }
 
 
@@ -276,6 +279,10 @@ body { font-family: sans-serif; }
     width: 390px;
     float: right;
     margin-right: 30px;
+}
+
+.abstract h1 {
+    margin-top: 0px;
 }
 
 /**************************************************/
@@ -369,7 +376,6 @@ body { font-family: sans-serif; }
     line-height: 50px
     margin-left: 40px;
     margin-top: 0px;
-    font-size: 14px;
     float: left;
     margin-bottom: 20px;
 }
@@ -391,16 +397,23 @@ body { font-family: sans-serif; }
 }
 
 .half {
-    width: 450px;
     float: left;
+}
+
+.colab {
+    width: 500px;
+}
+
+.bibtex {
+    width: 400px;
 }
 
 .colab img {
     padding-top: 10px;
 }
 
-div.code {
-    font-size: 12px;
+div.bib {
+    font-size: 14px;
     line-height: 20px;
     margin-left: 30px;
     border-radius: 0.35em;

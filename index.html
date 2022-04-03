@@ -3,7 +3,7 @@
     <head>
         <title>Socratic Models: Composing Zero-Shot Multimodal Reasoning with Language</title>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="https://use.typekit.net/quv7bsd.css"> <!-- fonts -->
         <link rel="stylesheet" href="flickity.min.css">
         <script src="flickity.pkgd.min.js"></script>
@@ -19,8 +19,7 @@
     </head>
     <body id="body">
         <div id="main"> 
-            <header id="header">
-            </header>
+            <header id="header"></header>
             <!-- style="padding-bottom:1em" -->
             <div id="profile">
                 <!-- <img src="images/profile.jpg"> -->
@@ -217,10 +216,12 @@
                 <p>In this work we propose Socratic Models (SMs), a framework that uses structured dialogue between pre-existing foundation models, each of which can exhibit unique (but complementary) capabilities depending on the distributions of data on which they are trained. On various perceptual tasks, this work presents a case study of SMs with visual language models (VLMs, e.g., CLIP), large language models (LMs, e.g., GPT-3, RoBERTa), and audio language models (ALMs, e.g., Wav2CLIP, Speech2Text). From video search, to image captioning; from generating free-form answers to contextual reasoning questions, to forecasting future activities – SMs can provide meaningful results for complex tasks across classically challenging computer vision domains, without any model finetuning.</p>
                 <br>
                 <p>Examples of guided multi-model exchanges (Socratic Models) for an egocentric perception system: (i, left) parsing a natural language question into search entities (with LM) to be used to find the most relevant key moments in the video (with VLM); (ii, middle) describing each key frame by detecting places and objects (VLM), suggesting commonsense activities (LM), pruning the most likely activity (VLM), then generating a natural language summary (LM) of the SM interaction; (iii, right) concatenating key frame summaries into a language-based world-state history that an LM can use as context to answer the original question:</p>
+                <br>
                 <img src="images/SM-system.png">
                 <br>
                 <br>
                 <p>SMs can interface with the user through dialogue and perform a variety of tasks (formulated as Q&A) with egocentric video: sorting reasoning questions by their output modalities e.g., text-base responses, images from visual search, video snippets from audio search. Depending on the modality, each question can pass through a different sequence of Socratic interactions between the LM, VLM, and ALM:</p>
+                <br>
                 <img src="images/ego-vqa-system.png">
                 <br>
                 <br>
@@ -241,12 +242,9 @@
 
 
 
-
-
-
             <div id="code">
                 <div class="section abstract half colab">
-                    <h1>Code</h1>
+                    <h2>Code</h2>
                     <p>We plan to release prototypes in the form of self-contained colabs. They will be added to <a href="https://github.com/google-research/google-research/tree/master/socraticmodels">this repository</a> and linked here:<br>
                         <!-- <br>&nbsp;&nbsp;•&nbsp;&nbsp;Image Captioning&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://colab.research.google.com/drive/1KOlc9nN0NJ5GAif_dmuOqsRqlZycoIrc?usp=sharing"><img src="images/colabicon.png" style="height: 20px"></a> -->
                         <br>&nbsp;&nbsp;•&nbsp;&nbsp;Image Captioning - <a href="https://colab.research.google.com/drive/1KOlc9nN0NJ5GAif_dmuOqsRqlZycoIrc?usp=sharing">Open in Colab</a>
@@ -257,8 +255,8 @@
                 </div>
             </div>
             <div class="section bibtex half">
-                <h1>Citation</h1>
-                <div class="code">@article{zeng2022socraticmodels,<br>
+                <h2>Citation</h2>
+                <div class="bib">@article{zeng2022socraticmodels,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;title={Socratic Models: Composing Zero-Shot Multimodal Reasoning with Language},<br>
 &nbsp;&nbsp;&nbsp;&nbsp;author={Andy Zeng and Adrian Wong and Stefan Welker and Krzysztof Choromanski and Federico Tombari and Aveek Purohit and Michael Ryoo and Vikas Sindhwani and Johnny Lee and Vincent Vanhoucke and Pete Florence},<br>
 &nbsp;&nbsp;&nbsp;&nbsp;journal={arXiv},<br>
@@ -267,11 +265,12 @@
             </div>
 
 
-            <div class="divider"></div>
+            <div style="clear: both;"></div>
+            <!-- <div class="divider"></div> -->
 
 
-            <div class="section abstract">
-                <h1>Egocentric video example -- watch the full source video on YouTube</h1>
+            <div class="section method">
+                <h1>Egocentric video example – watch the full source video on YouTube</h1>
 
                 <p align="center">
                 <!-- pete note: i think most browsers wont autoplay if muted.  but I'd rather not let this play-->
@@ -287,7 +286,7 @@
             </div>
 
 
-            <div class="section abstract">
+            <div class="section method">
                 <h1>Acknowledgements</h1>
                 <p>We thank Debidatta Dwibedi and Matthew O’Kelly for excellent feedback on improving this manuscript, Anelia Angelova, Jean-Jacques Slotine, Jonathan Tompson, Maria Attarian, Shuran Song, for fruitful technical discussions, Kan Huang for applications support, Ahmed Omran, Aren Jensen, Malcolm Slaney, Karolis Misiunas for advice on audio models, and Cody Wanner for YouTube videos.</p>
                 <br>
