@@ -59,29 +59,42 @@
             <div class="section abstract">
                 <h1>Abstract</h1>
                 <!-- <img src="images/internet-venn.png" style="height: auto; width: 500px"> -->
-                <video width="480px" playsinline="" muted="" autoplay="" loop="" style="float: right; margin-right: 30px; padding-left: 10px; padding-bottom: 10px; padding-top: 7px">
+                <video width="445px" playsinline="" muted="" autoplay="" loop="" style="float: right; margin-right: 30px; padding-left: 10px; padding-bottom: 10px; padding-top: 7px">
                     <source src="images/sm_1_venn.mp4" type="video/mp4">
                 </video>
-                <p>Large foundation models can exhibit unique capabilities depending on the domain of data they are trained on. While these domains are generic, they may only barely overlap. For example, visual-language models (VLMs) are trained on Internet-scale image captions, but large language models (LMs) are further trained on Internet-scale text with no images (e.g. from spreadsheets, to SAT questions). As a result, these models store different forms of commonsense knowledge across different domains. In this work, we show that this model diversity is symbiotic, and can be leveraged to build AI systems with structured Socratic dialogue -- in which new multimodal tasks are formulated as a guided language-based exchange between different pre-existing foundation models, without additional finetuning. In the context of egocentric perception, we present a case study of Socratic Models (SMs) that can provide meaningful results for complex tasks such as generating free-form answers to contextual questions about egocentric video, by formulating video Q&A as short story Q&A, i.e. summarizing the video into a short story, then answering questions about it. Additionally, SMs can generate captions for Internet images, and are competitive with state-of-the-art on zero-shot video-to-text retrieval with 42.8 R@1 on MSR-VTT 1k-A. SMs demonstrate how to compose foundation models zero-shot to capture new multimodal functionalities, without domain-specific data collection.</p>
+                <p>Large pretrained (e.g., “foundation”) models exhibit distinct capabilities depending on the domain of data they are trained on. While these domains are generic, they may only barely overlap. For example, visual-language models (VLMs) are trained on Internet-scale image captions, but large language models (LMs) are further trained on Internet-scale text with no images (e.g., spreadsheets, SAT questions, code). As a result, these models store different forms of commonsense knowledge across different domains.  In this work, we show that this diversity is symbiotic, and can be leveraged through Socratic Models (SMs):  a modular framework in which multiple pretrained models may be composed zero-shot i.e., via multimodal-informed prompting, to exchange information with each other and capture new multimodal capabilities, without requiring finetuning. With minimal engineering, SMs are not only competitive with state-of-the-art zero-shot image captioning and video-to-text retrieval, but also enable new applications such as (i) answering free-form questions about egocentric video, (ii) engaging in multimodal assistive dialogue with people (e.g., for cooking recipes) by interfacing with external APIs and databases (e.g., web search), and (iii) robot perception and planning.</p>
                 
             </div>
 
             <div class="section method">
-            <h1><b>Overview:</b> Zero-Shot Multimodal Applications with Socratic Models</h1>
-            <img src="images/ego-perception.png">
+                <h1><b>Overview:</b> Prompt Engineering Multimodal Applications</h1>
+                <p>Socratic Models (SMs) is a framework in which multiple large pretrained models may be composed through language (via prompting) without requiring training, to perform new downstream multimodal tasks. This offers an alternative method for composing pretrained models that directly uses language as the intermediate representation by which the modules exchange information with each other. It is both distinct from, and may be complementary to, other multimodal approaches such as joint training a single model over all modalities. SMs are perhaps most intuitively understood through examples, which are provided throughout the paper.</p><br>
+                <img src="images/ego-perception.png">
             </div>
 
+
+            <div class="section method">
+                <h1><b>Highlight:</b> Zero-Shot Robot Perception and Planning</h1>
+                <p>SMs can be used to enable robots to perform language-conditioned tasks. Our example system uses a VLM (open-vocabulary object detection with <a href="https://arxiv.org/abs/2104.13921">ViLD</a>) to describe the objects in the scene, feeds that description as context to a LM as a multi-step planner, that then generates the individual steps to be passed to a pretrained language-conditioned robot policy (e.g., models similar to <a href="https://cliport.github.io/">CLIPort</a> for open vocabulary pick-and-place). Chaining this system together expands the set of language-specified tasks beyond the original set of primitives trained by the policy, and enables applications involving human dialogue with the robot.</p><br>
+                <p>
+                    <video controls width="70%" playsinline="" muted="" autoplay="" loop="">
+                        <source src="images/robots_demo.mp4" type="video/mp4">
+                    </video>
+                </p>
+            </div>
+
+
             <div class="section ego-vqa">
-                <h1><b>Results Highlight</b>: Zero-shot Open-ended Reasoning (i.e., Q&A, Forecasting) on Egocentric Video</h1>
-                <p>Our example Socratic-Model-based system for egocentric perception can respond to a variety of open-ended text prompts -- examples below:</p><br>
+                <h1><b>Highlight</b>: Zero-shot Open-ended Reasoning (i.e., Q&A, Forecasting) on Egocentric Video</h1>
+                <p>Our example Socratic-Model-based system for egocentric perception can respond to a variety of open-ended text prompts -- from generating free-form answers to contextual reasoning questions, to forecasting future activities:</p><br>
                 <!-- <img src="images/results-v4-website.png"> -->
-                <p><video width="70%" playsinline="" muted="" autoplay="" loop="">
+                <p><video controls width="70%" playsinline="" muted="" autoplay="" loop="">
                         <source src="images/sm_2_ego_qa.mp4" type="video/mp4">
                 </video>
                 </p>
                 <br>
-                <p>This works by forming a <i>language-based world-state history</i> and treating <i>Video Q&A as a reading comprehension problem</i>:</p>
-                <p><video width="70%" playsinline="" muted="" autoplay="" loop="">
+                <p>This works by formulating <i>video understanding</i> as <i>reading comprehension</i>, i.e., re-framing “video Q&A” as a “short story Q&A” problem, which differs from common paradigms for video understanding that may involve supervising video-text models on labeled datasets or adversarial training. To this end, we first extract a set of “key moments” throughout the video (e.g., via importance sampling, or video/audio search based on the input query, discussed in Appendix). We then caption the key frames indexed by these moments, and recursively summarize them into a language-based record of events, which we term a language-based world-state history. This is then passed as context to an LM to perform various reasoning tasks via text completion such as Q&A, for which LMs have demonstrated strong zero-shot performance. Drawing analogies to 3D vision and robotics, the world-state history can be thought of as building an on-the-fly reconstruction of events in the observable world with language, rather than other representations, such as dynamically-updated 3D meshes or neural fields.</p><br>
+                <p><video controls width="70%" playsinline="" muted="" autoplay="" loop="">
                         <source src="images/sm_3_ego_summary.mp4" type="video/mp4">
                 </video>
                 </p>
@@ -109,11 +122,21 @@
             <div style="clear: both;"></div>
             <!-- <div class="divider"></div> -->
 
+            <div class="section method">
+                <h1><b>Highlight:</b> Multimodal Assistive Dialogue</h1>
+                <p>SMs can be adapted to engage in multimodal dialogue to assist people in every day tasks, such as cooking. Our example application helps the user search for a recipe, then guides them through it step by step. The system allows the user to navigate recipe steps with dialogue, provides ingredient replacements or advice (using LM priors), and searches for visual references (images/videos) on user request. This is a case study in (i) prompting a dialogue LM to produce key phrase tokens that elicit specific Socratic interactions (e.g., video search via a VLM to output visual data), and (ii) using a web crawler as an additional module (in the form of external API) engaged in Socratic discussion with other models to retrieve information online. Here is a live demo (with narration):</p><br>
+                <p>
+                    <video controls width="70%" playsinline="" muted="" autoplay="" loop="">
+                        <source src="images/socratic-guided-recipes.mp4" type="video/mp4">
+                    </video>
+                </p>
+            </div>
+
             <div class="section ego-vqa">
-                <h1><b>Results Highlight</b>: Zero-shot Image Captioning</h1>
-                <p>We can also compose foundation models zero-shot to perform image captioning, through closed-loop Socratic dialogue:</p>
+                <h1><b>Highlight</b>: Zero-Shot Image Captioning</h1>
+                <p>We can also compose foundation models to caption images zero-shot, through closed-loop Socratic dialogue:</p>
                 <br>
-                <p><video width="75%" playsinline="" muted="" autoplay="" loop="">
+                <p><video controls width="75%" playsinline="" muted="" autoplay="" loop="">
                         <source src="images/sm_4_image_captioning_2.mp4" type="video/mp4">
                 </video>
                 </p>
@@ -215,10 +238,10 @@
             <!-- <div class="divider"></div> -->
 
             <div class="section ego-vqa">
-                <h1><b>Results Highlight</b>: Zero-shot Video-to-Text Retrieval</h1>
+                <h1><b>Highlight</b>: Zero-Shot Video-to-Text Retrieval</h1>
                 <p>We also can compose mutiple models to perform zero-shot video-to-text retrieval -- this achieves state-of-the-art for zero-shot methods, nearing the gap with finetuned-on-the-dataset methods:</p>
                 <br>
-                <p><video width="75%" playsinline="" muted="" autoplay="" loop="">
+                <p><video controls width="75%" playsinline="" muted="" autoplay="" loop="">
                         <source src="images/sm_5_video_to_text.mp4" type="video/mp4">
                 </video>
                 </p>
@@ -233,13 +256,19 @@
                     <a href="https://andyzeng.github.io/"><img src="images/people/andy.jpg"><p>Andy Zeng</p></a>
                 </div>
                 <div class="people-profile">
+                    <a href="https://www.linkedin.com/in/maria-attarian/"><img src="images/people/maria.jpeg"><p>Maria Attarian</p></a>
+                </div>
+                <div class="people-profile">
+                    <a href="https://brianichter.com/"><img src="images/people/brian.jpg"><p>Brian Ichter</p></a>
+                </div>
+                <div class="people-profile kchoro">
+                    <a href="https://www.engineering.columbia.edu/krzysztof-choromanski"><img src="images/people/krzysztof.jpg"><p>Krzysztof Choromanski</p></a>
+                </div>
+                <div class="people-profile">
                     <a href="https://www.linkedin.com/in/almostsquare"><img src="images/people/adrian.png"><p>Adrian Wong</p></a>
                 </div>
                 <div class="people-profile">
                     <a href="https://www.linkedin.com/in/stefan-welker"><img src="images/people/stefan.jpg"><p>Stefan Welker</p></a>
-                </div>
-                <div class="people-profile kchoro">
-                    <a href="https://www.engineering.columbia.edu/krzysztof-choromanski"><img src="images/people/krzysztof.jpg"><p>Krzysztof Choromanski</p></a>
                 </div>
                 <div class="people-profile">
                     <a href="https://federicotombari.github.io/"><img src="images/people/federico.jpeg"><p>Federico Tombari</p></a>
@@ -316,8 +345,9 @@
                     <p>We plan to release prototypes in the form of self-contained colabs. They will be added to <a href="https://github.com/google-research/google-research/tree/master/socraticmodels">this repository</a> and linked here:<br>
                         <!-- <br>&nbsp;&nbsp;•&nbsp;&nbsp;Image Captioning&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://colab.research.google.com/drive/1KOlc9nN0NJ5GAif_dmuOqsRqlZycoIrc?usp=sharing"><img src="images/colabicon.png" style="height: 20px"></a> -->
                         <br>&nbsp;&nbsp;•&nbsp;&nbsp;Image Captioning - <a href="https://colab.research.google.com/drive/1KOlc9nN0NJ5GAif_dmuOqsRqlZycoIrc?usp=sharing">Open in Colab</a>
+                        <br>&nbsp;&nbsp;•&nbsp;&nbsp;Video Understanding (MSR-VTT) - <a href="https://colab.research.google.com/drive/1mSKNbO1rK6CTJoJ5HifE5SftADAQzE70?usp=sharing">Open in Colab</a> 
                         <br>&nbsp;&nbsp;•&nbsp;&nbsp;Egocentric Video Q&A - Coming soon
-                        <br>&nbsp;&nbsp;•&nbsp;&nbsp;Video Understanding (MSR-VTT) - Coming soon<!-- <a href="https://colab.research.google.com/drive/1Lr7DChtJJRteP9vOP_PRs2lCzZKK8aOc?usp=sharing">Open in Colab</a>  -->
+                        <br>&nbsp;&nbsp;•&nbsp;&nbsp;Robot Perception & Planning - Coming soon
                     </p>
                     <br>
                 </div>
@@ -326,7 +356,7 @@
                 <h2>Citation</h2>
                 <div class="bib">@article{zeng2022socraticmodels,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;title={Socratic Models: Composing Zero-Shot Multimodal Reasoning with Language},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;author={Andy Zeng and Adrian Wong and Stefan Welker and Krzysztof Choromanski and Federico Tombari and Aveek Purohit and Michael Ryoo and Vikas Sindhwani and Johnny Lee and Vincent Vanhoucke and Pete Florence},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;author={Andy Zeng and Maria Attarian and Brian Ichter and Krzysztof Choromanski and Adrian Wong and Stefan Welker and Federico Tombari and Aveek Purohit and Michael Ryoo and Vikas Sindhwani and Johnny Lee and Vincent Vanhoucke and Pete Florence},<br>
 &nbsp;&nbsp;&nbsp;&nbsp;journal={arXiv},<br>
 &nbsp;&nbsp;&nbsp;&nbsp;year={2022}<br>
 }</div>
@@ -339,7 +369,7 @@
 
             <div class="section method">
                 <h1>Acknowledgements</h1>
-                <p>We thank Debidatta Dwibedi and Matthew O’Kelly for excellent feedback on improving this manuscript, Anelia Angelova, Jean-Jacques Slotine, Jonathan Tompson, Maria Attarian, Shuran Song, for fruitful technical discussions, Kan Huang for applications support, Ahmed Omran, Aren Jensen, Malcolm Slaney, Karolis Misiunas for advice on audio models, and Cody Wanner for YouTube videos.</p>
+                <p>We thank Debidatta Dwibedi, Matthew O’Kelly, and Kevin Zakka for excellent feedback on improving this manuscript, Anelia Angelova, Jean-Jacques Slotine, Jonathan Tompson, Shuran Song, for fruitful technical discussions, Kan Huang for applications support, Ahmed Omran, Aren Jensen, Malcolm Slaney, Karolis Misiunas for advice on audio models, and Cody Wanner for YouTube videos.</p>
                 <br>
             </div>
             <br><br><br><br><br><br><br><br><br><br>
